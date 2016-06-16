@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace MercatorWinFormApp
 {
-    public partial class frmLogin : Form
+    public partial class frmRegistro : Form
     {
-        public frmLogin()
+        public frmRegistro()
         {
             InitializeComponent();
-        }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
