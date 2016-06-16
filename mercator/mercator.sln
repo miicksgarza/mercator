@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercatorWinFormApp", "MercatorWinFormApp\MercatorWinFormApp.csproj", "{19392274-189C-47C6-9EC4-6BB39E74B3D7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MercatorAppESC", "MercatorAppESC", "{A7505307-DD6A-446A-BFCD-D8D7930F4E41}"
+	ProjectSection(SolutionItems) = preProject
+		dbMercatorESC_UAT.sql = dbMercatorESC_UAT.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
