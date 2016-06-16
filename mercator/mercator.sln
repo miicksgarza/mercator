@@ -3,12 +3,42 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{150CD847-02C5-44AD-B627-BAF7A16E39E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{8F4C4BC7-8B0F-458E-A73D-10C48E8ACAE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinesLogic", "BussinesLogic\BussinesLogic.csproj", "{150DCD91-888D-4FD3-9059-5A72E83FF651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7E8462F2-2C80-4614-8A91-FD738906FB0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercatorWinFormApp", "MercatorWinFormApp\MercatorWinFormApp.csproj", "{19392274-189C-47C6-9EC4-6BB39E74B3D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MercatorAppESC", "MercatorAppESC", "{A7505307-DD6A-446A-BFCD-D8D7930F4E41}"
 	ProjectSection(SolutionItems) = preProject
-		dbmercatorESC.sql = dbmercatorESC.sql
+		dbMercatorESC_UAT.sql = dbMercatorESC_UAT.sql
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4C4BC7-8B0F-458E-A73D-10C48E8ACAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4C4BC7-8B0F-458E-A73D-10C48E8ACAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4C4BC7-8B0F-458E-A73D-10C48E8ACAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4C4BC7-8B0F-458E-A73D-10C48E8ACAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150DCD91-888D-4FD3-9059-5A72E83FF651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150DCD91-888D-4FD3-9059-5A72E83FF651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150DCD91-888D-4FD3-9059-5A72E83FF651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150DCD91-888D-4FD3-9059-5A72E83FF651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E8462F2-2C80-4614-8A91-FD738906FB0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E8462F2-2C80-4614-8A91-FD738906FB0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E8462F2-2C80-4614-8A91-FD738906FB0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E8462F2-2C80-4614-8A91-FD738906FB0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
