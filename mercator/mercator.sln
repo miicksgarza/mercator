@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MercatorAppESC", "MercatorA
 		dbMercatorESC_UAT.sql = dbMercatorESC_UAT.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercatorWebApp", "MercatorWebApp\MercatorWebApp.csproj", "{7BCA95A4-4469-462A-96CF-044DC99D337D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19392274-189C-47C6-9EC4-6BB39E74B3D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BCA95A4-4469-462A-96CF-044DC99D337D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCA95A4-4469-462A-96CF-044DC99D337D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCA95A4-4469-462A-96CF-044DC99D337D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCA95A4-4469-462A-96CF-044DC99D337D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
