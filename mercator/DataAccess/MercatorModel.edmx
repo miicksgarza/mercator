@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MercatorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="PKNum_compra" />
+          </Key>
+          <Property Name="PKNum_compra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKNum_proveedor" Type="int" Nullable="false" />
+          <Property Name="Empleado" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Fecha_rec" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleCompra">
+          <Key>
+            <PropertyRef Name="PKId_detallecompra" />
+          </Key>
+          <Property Name="PKId_detallecompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKNum_compra" Type="int" Nullable="false" />
+          <Property Name="FKProducto1" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="PKId_detalle" />
+          </Key>
+          <Property Name="PKId_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKNum_venta" Type="int" Nullable="false" />
+          <Property Name="FKProducto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+          <Property Name="Subtotal" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="PKProducto" />
+          </Key>
+          <Property Name="PKProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod_Barras" Type="varchar(max)" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Fabricante" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="PKNum_proveedor" />
+          </Key>
+          <Property Name="PKNum_proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_provedor" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FKNum_proveedor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="PKNum_venta" />
+          </Key>
+          <Property Name="PKNum_venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Compra__FKNum_pr__1B0907CE">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="PKNum_proveedor" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="FKNum_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCo__FKNum__1DE57479">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="DetalleCompra" Type="Self.DetalleCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="PKNum_compra" />
+            </Principal>
+            <Dependent Role="DetalleCompra">
+              <PropertyRef Name="FKNum_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCo__FKPro__1ED998B2">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DetalleCompra" Type="Self.DetalleCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="PKProducto" />
+            </Principal>
+            <Dependent Role="DetalleCompra">
+              <PropertyRef Name="FKProducto1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleVe__FKNum__173876EA">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="PKNum_venta" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="FKNum_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleVe__FKPro__182C9B23">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="PKProducto" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="FKProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__FKNum__1273C1CD">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="PKProducto" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="FKNum_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MercatorModelStoreContainer">
+          <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleCompra" EntityType="Self.DetalleCompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Compra__FKNum_pr__1B0907CE" Association="Self.FK__Compra__FKNum_pr__1B0907CE">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Compra" EntitySet="Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCo__FKNum__1DE57479" Association="Self.FK__DetalleCo__FKNum__1DE57479">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="DetalleCompra" EntitySet="DetalleCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCo__FKPro__1ED998B2" Association="Self.FK__DetalleCo__FKPro__1ED998B2">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleCompra" EntitySet="DetalleCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleVe__FKNum__173876EA" Association="Self.FK__DetalleVe__FKNum__173876EA">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleVe__FKPro__182C9B23" Association="Self.FK__DetalleVe__FKPro__182C9B23">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__FKNum__1273C1CD" Association="Self.FK__Proveedor__FKNum__1273C1CD">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MercatorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="PKNum_compra" />
+          </Key>
+          <Property Name="PKNum_compra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKNum_proveedor" Type="Int32" Nullable="false" />
+          <Property Name="Empleado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_rec" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK__Compra__FKNum_pr__1B0907CE" FromRole="Compra" ToRole="Proveedor" />
+          <NavigationProperty Name="DetalleCompras" Relationship="Self.FK__DetalleCo__FKNum__1DE57479" FromRole="Compra" ToRole="DetalleCompra" />
+        </EntityType>
+        <EntityType Name="DetalleCompra">
+          <Key>
+            <PropertyRef Name="PKId_detallecompra" />
+          </Key>
+          <Property Name="PKId_detallecompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKNum_compra" Type="Int32" Nullable="false" />
+          <Property Name="FKProducto1" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Compra" Relationship="Self.FK__DetalleCo__FKNum__1DE57479" FromRole="DetalleCompra" ToRole="Compra" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__DetalleCo__FKPro__1ED998B2" FromRole="DetalleCompra" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="PKId_detalle" />
+          </Key>
+          <Property Name="PKId_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKNum_venta" Type="Int32" Nullable="false" />
+          <Property Name="FKProducto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Subtotal" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Venta" Relationship="Self.FK__DetalleVe__FKNum__173876EA" FromRole="DetalleVenta" ToRole="Venta" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__DetalleVe__FKPro__182C9B23" FromRole="DetalleVenta" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="PKProducto" />
+          </Key>
+          <Property Name="PKProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_Barras" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Fabricante" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DetalleCompras" Relationship="Self.FK__DetalleCo__FKPro__1ED998B2" FromRole="Producto" ToRole="DetalleCompra" />
+          <NavigationProperty Name="DetalleVentas" Relationship="Self.FK__DetalleVe__FKPro__182C9B23" FromRole="Producto" ToRole="DetalleVenta" />
+          <NavigationProperty Name="Proveedors" Relationship="Self.FK__Proveedor__FKNum__1273C1CD" FromRole="Producto" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="PKNum_proveedor" />
+          </Key>
+          <Property Name="PKNum_proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_provedor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FKNum_proveedor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__FKNum_pr__1B0907CE" FromRole="Proveedor" ToRole="Compra" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__Proveedor__FKNum__1273C1CD" FromRole="Proveedor" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="PKNum_venta" />
+          </Key>
+          <Property Name="PKNum_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Total" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
+          <NavigationProperty Name="DetalleVentas" Relationship="Self.FK__DetalleVe__FKNum__173876EA" FromRole="Venta" ToRole="DetalleVenta" />
+        </EntityType>
+        <Association Name="FK__Compra__FKNum_pr__1B0907CE">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="PKNum_proveedor" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="FKNum_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCo__FKNum__1DE57479">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="DetalleCompra" Type="Self.DetalleCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="PKNum_compra" />
+            </Principal>
+            <Dependent Role="DetalleCompra">
+              <PropertyRef Name="FKNum_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCo__FKPro__1ED998B2">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DetalleCompra" Type="Self.DetalleCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="PKProducto" />
+            </Principal>
+            <Dependent Role="DetalleCompra">
+              <PropertyRef Name="FKProducto1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleVe__FKNum__173876EA">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="PKNum_venta" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="FKNum_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleVe__FKPro__182C9B23">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="PKProducto" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="FKProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__FKNum__1273C1CD">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="PKProducto" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="FKNum_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MercatorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Compras" EntityType="Self.Compra" />
+          <EntitySet Name="DetalleCompras" EntityType="Self.DetalleCompra" />
+          <EntitySet Name="DetalleVentas" EntityType="Self.DetalleVenta" />
+          <EntitySet Name="Productoes" EntityType="Self.Producto" />
+          <EntitySet Name="Proveedors" EntityType="Self.Proveedor" />
+          <EntitySet Name="Ventas" EntityType="Self.Venta" />
+          <AssociationSet Name="FK__Compra__FKNum_pr__1B0907CE" Association="Self.FK__Compra__FKNum_pr__1B0907CE">
+            <End Role="Proveedor" EntitySet="Proveedors" />
+            <End Role="Compra" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCo__FKNum__1DE57479" Association="Self.FK__DetalleCo__FKNum__1DE57479">
+            <End Role="Compra" EntitySet="Compras" />
+            <End Role="DetalleCompra" EntitySet="DetalleCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCo__FKPro__1ED998B2" Association="Self.FK__DetalleCo__FKPro__1ED998B2">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="DetalleCompra" EntitySet="DetalleCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleVe__FKNum__173876EA" Association="Self.FK__DetalleVe__FKNum__173876EA">
+            <End Role="Venta" EntitySet="Ventas" />
+            <End Role="DetalleVenta" EntitySet="DetalleVentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleVe__FKPro__182C9B23" Association="Self.FK__DetalleVe__FKPro__182C9B23">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="DetalleVenta" EntitySet="DetalleVentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__FKNum__1273C1CD" Association="Self.FK__Proveedor__FKNum__1273C1CD">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="Proveedor" EntitySet="Proveedors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MercatorModelStoreContainer" CdmEntityContainer="MercatorEntities">
+          <EntitySetMapping Name="Compras">
+            <EntityTypeMapping TypeName="MercatorModel.Compra">
+              <MappingFragment StoreEntitySet="Compra">
+                <ScalarProperty Name="PKNum_compra" ColumnName="PKNum_compra" />
+                <ScalarProperty Name="FKNum_proveedor" ColumnName="FKNum_proveedor" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Fecha_rec" ColumnName="Fecha_rec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleCompras">
+            <EntityTypeMapping TypeName="MercatorModel.DetalleCompra">
+              <MappingFragment StoreEntitySet="DetalleCompra">
+                <ScalarProperty Name="PKId_detallecompra" ColumnName="PKId_detallecompra" />
+                <ScalarProperty Name="FKNum_compra" ColumnName="FKNum_compra" />
+                <ScalarProperty Name="FKProducto1" ColumnName="FKProducto1" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleVentas">
+            <EntityTypeMapping TypeName="MercatorModel.DetalleVenta">
+              <MappingFragment StoreEntitySet="DetalleVenta">
+                <ScalarProperty Name="PKId_detalle" ColumnName="PKId_detalle" />
+                <ScalarProperty Name="FKNum_venta" ColumnName="FKNum_venta" />
+                <ScalarProperty Name="FKProducto" ColumnName="FKProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productoes">
+            <EntityTypeMapping TypeName="MercatorModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="PKProducto" ColumnName="PKProducto" />
+                <ScalarProperty Name="Cod_Barras" ColumnName="Cod_Barras" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedors">
+            <EntityTypeMapping TypeName="MercatorModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="PKNum_proveedor" ColumnName="PKNum_proveedor" />
+                <ScalarProperty Name="Nom_provedor" ColumnName="Nom_provedor" />
+                <ScalarProperty Name="FKNum_proveedor" ColumnName="FKNum_proveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="MercatorModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="PKNum_venta" ColumnName="PKNum_venta" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
