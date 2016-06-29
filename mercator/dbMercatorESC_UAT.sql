@@ -4,7 +4,7 @@ Description              : Script para generar la base de datos del proyecto
 Version	                 : 1.0
 Modification History	 : IS	-	Date		-	Description
                            ----		----------		----------------------------------------------------------
-						   BJPH		15/06/2016		Se creo el script para la base de datos de Mercator con usuario de servidor y bd
+						   BJPH		29/06/2016		Se agregaron las tablas en el script.
 **************************************************************************************************************/
 
 USE master
@@ -67,32 +67,122 @@ END
 BEGIN TRY
 	BEGIN TRAN
 		IF EXISTS(SELECT * FROM dbo.SYSDATABASES WHERE name = 'dbMercatorESC_UAT' )
-						BEGIN		
-				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-							WHERE TABLE_SCHEMA = 'dbo' 
-							AND  TABLE_NAME = ''))
-					BEGIN
-						SELECT 'Table already exists' AS 'Msg'
-					END
-					ELSE
-						BEGIN
-							CREATE TABLE 
-							(
-
-							);
-						END
-						
-				COMMIT	
-				
-			END
-			ELSE
+		BEGIN		
+			IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'Producto'))
 				BEGIN
-					
-					ROLLBACK
-					
-					SET @Errormessage = 'Database not exist'
-					RAISERROR(@Errormessage,16,1);
+					SELECT 'Table Producto already exists' AS 'Msg'
 				END
+				ELSE
+					BEGIN
+						CREATE TABLE Producto
+						(
+							PKProducto INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+							Cod_Barras VARCHAR(MAX) NOT NULL,
+							Nombre NVARCHAR(20) NOT NULL, 
+							Precio FLOAT NOT NULL,
+							Cantidad INT NOT NULL,
+							FKNum_provedor INT NOT NULL,
+							Fabricante NVARCHAR(20) NOT NULL 
+						);
+					END
+
+			IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'Proveedor'))
+				BEGIN
+					SELECT 'Table Proveedor already exists' AS 'Msg'
+				END
+				ELSE
+					BEGIN
+						 CREATE TABLE Proveedor
+				(
+				PKNum_proveedor INT NOT NULL IDENTITY(1,1) PRIMARY  KEY,
+				Nom_provedor NVARCHAR(30) NOT NULL
+				)
+					END
+						
+
+				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'Venta'))
+				BEGIN
+					SELECT 'Table Venta already exists' AS 'Msg'
+				END
+				ELSE
+					BEGIN
+						 CREATE TABLE Venta
+				(
+				 PKNum_venta INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+				 Fecha DATETIME NOT NULL,
+				 Total DECIMAL(11,2) NOT NULL
+				)
+					END	
+				
+				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'DetalleVenta'))
+				BEGIN
+					SELECT 'Table DetalleVenta already exists' AS 'Msg'
+				END
+				ELSE
+					BEGIN
+						CREATE TABLE DetalleVenta
+						(
+							PKId_detalle INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+							FKNum_venta INT NOT NULL,
+							FKProducto INT NOT NULL ,
+							Cantidad INT NOT NULL,
+							Precio MONEY NOT NULL,
+							Subtotal DECIMAL (11,2) NOT NULL 
+						);
+					END
+
+				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'Compra'))
+				BEGIN
+					SELECT 'Table Compra already exists' AS 'Msg'
+				END
+				ELSE
+					BEGIN
+						CREATE TABLE Compra
+						(
+							 PKNum_compra INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+							 FKNum_proveedor INT NOT NULL,
+							 Empleado VARCHAR(40)  NOT NULL,
+							 Fecha_rec DATETIME NOT NULL
+						);
+					END
+				
+				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'DetalleCompra'))
+				BEGIN
+					SELECT 'Table DetalleCompra already exists' AS 'Msg'
+				END
+				ELSE
+					BEGIN
+						CREATE TABLE DetalleCompra
+						(
+							FKNum_compra INT NOT NULL,
+							FKProducto1 INT NOT NULL,
+							Cantidad INT NOT NULL,
+							Monto MONEY NOT NULL
+						);
+					END
+				
+				COMMIT
+			END
+		ELSE
+			BEGIN
+					
+				ROLLBACK
+					
+				SET @Errormessage = 'Database not exist'
+				RAISERROR(@Errormessage,16,1);
+			END
 END TRY
 BEGIN CATCH
 	
