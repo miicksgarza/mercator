@@ -83,7 +83,6 @@ BEGIN TRY
 							Nombre NVARCHAR(20) NOT NULL, 
 							Precio FLOAT NOT NULL,
 							Cantidad INT NOT NULL,
-							FKNum_provedor INT NOT NULL,
 							Fabricante NVARCHAR(20) NOT NULL 
 						);
 					END
@@ -99,7 +98,8 @@ BEGIN TRY
 						 CREATE TABLE Proveedor
 				(
 				PKNum_proveedor INT NOT NULL IDENTITY(1,1) PRIMARY  KEY,
-				Nom_provedor NVARCHAR(30) NOT NULL
+				Nom_provedor NVARCHAR(30) NOT NULL,
+				FKNum_proveedor INT NOT NULL REFERENCES Producto (PKProducto)
 				)
 					END
 						
@@ -116,7 +116,8 @@ BEGIN TRY
 				(
 				 PKNum_venta INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 				 Fecha DATETIME NOT NULL,
-				 Total DECIMAL(11,2) NOT NULL
+				 Total DECIMAL(11,2) NOT NULL,
+				 
 				)
 					END	
 				
@@ -131,8 +132,8 @@ BEGIN TRY
 						CREATE TABLE DetalleVenta
 						(
 							PKId_detalle INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-							FKNum_venta INT NOT NULL,
-							FKProducto INT NOT NULL ,
+							FKNum_venta INT NOT NULL REFERENCES Venta (PKNum_venta),
+				            FKProducto INT NOT NULL REFERENCES Producto (PKProducto),
 							Cantidad INT NOT NULL,
 							Precio MONEY NOT NULL,
 							Subtotal DECIMAL (11,2) NOT NULL 
@@ -150,7 +151,7 @@ BEGIN TRY
 						CREATE TABLE Compra
 						(
 							 PKNum_compra INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-							 FKNum_proveedor INT NOT NULL,
+							 FKNum_proveedor INT NOT NULL REFERENCES Proveedor (PKNum_proveedor),
 							 Empleado VARCHAR(40)  NOT NULL,
 							 Fecha_rec DATETIME NOT NULL
 						);
@@ -165,9 +166,10 @@ BEGIN TRY
 				ELSE
 					BEGIN
 						CREATE TABLE DetalleCompra
-						(
-							FKNum_compra INT NOT NULL,
-							FKProducto1 INT NOT NULL,
+						(	
+							PKId_detallecompra INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+							FKNum_compra INT NOT NULL REFERENCES Compra (PKNum_compra),
+							FKProducto1 INT NOT NULL REFERENCES Producto (PKProducto),
 							Cantidad INT NOT NULL,
 							Monto MONEY NOT NULL
 						);
