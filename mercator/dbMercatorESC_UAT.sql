@@ -4,7 +4,7 @@ Description              : Script para generar la base de datos del proyecto
 Version	                 : 1.0
 Modification History	 : IS	-	Date		-	Description
                            ----		----------		----------------------------------------------------------
-						   BJPH		29/06/2016		Se agregaron las tablas en el script.
+						   BJPH		29/06/2016		Se agregaron las tablas y añadio FK en el script.
 **************************************************************************************************************/
 
 USE master
