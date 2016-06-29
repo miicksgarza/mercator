@@ -1,13 +1,11 @@
-﻿/******************************************************************
-
-Historia de modificacion: 
-			Nombre:Brenda Judith Ponce Hernandez  Fecha: 15/06/2016 
-			Version: Microsoft SQL Server 2008
-			
-********************************************************************/
-
-
-
+﻿/*************************************************************************************************************
+Script Name              : dbMercatorESC
+Description              : Script para generar la base de datos del proyecto
+Version	                 : 1.0
+Modification History	 : IS	-	Date		-	Description
+                           ----		----------		----------------------------------------------------------
+						   BJPH		15/06/2016		Se creo el script para la base de datos de Mercator con usuario de servidor y bd
+**************************************************************************************************************/
 
 USE master
 GO
@@ -69,21 +67,42 @@ END
 BEGIN TRY
 	BEGIN TRAN
 		IF EXISTS(SELECT * FROM dbo.SYSDATABASES WHERE name = 'dbMercatorESC_UAT' )
-			BEGIN
-				IF (EXISTS (SELECT * FROM Usuario.Tables)
-				IF (EXISTS (SELECT * FROM Producto.Tables)
-				IF (EXISTS (SELECT * FROM Proveedor.Tables)
+						BEGIN		
+				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+							WHERE TABLE_SCHEMA = 'dbo' 
+							AND  TABLE_NAME = ''))
+					BEGIN
+						SELECT 'Table already exists' AS 'Msg'
+					END
+					ELSE
+						BEGIN
+							CREATE TABLE 
+							(
+
+							);
+						END
+						
+				COMMIT	
 				
-			COMMIT
-		END
-		ELSE
-			BEGIN
-			
-			ROLLBACK
-			
-			SET @Errormessage = 'Database not exist'
-			RAISERROR(@Errormessage,16,1);
-		END
+			END
+			ELSE
+				BEGIN
+					
+					ROLLBACK
+					
+					SET @Errormessage = 'Database not exist'
+					RAISERROR(@Errormessage,16,1);
+				END
 END TRY
 BEGIN CATCH
-	SELECT @Errormessage = 'Error' + CAST + ERROR_MESSAGE()+ '.Error Line:*'+ CAST(ERROR_LINE() AS VARCHAR(50)) + '*.';
+	
+	SELECT  @Errormessage = 'Error: ' + CAST(ERROR_NUMBER() AS NVARCHAR) + ' -> ' + ERROR_MESSAGE() + '. Error Line: *' + CAST(ERROR_LINE() AS VARCHAR(50)) + '*.'; 
+	
+	--SELECT  @Errormessage AS Msg;
+	
+	RAISERROR(@Errormessage,16,1);
+	
+	IF(@@TRANCOUNT > 0)
+		ROLLBACK
+		
+END CATCH
