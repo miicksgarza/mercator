@@ -48,6 +48,9 @@
     <Compile Include="DetalleVenta.cs">
       <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Empleado.cs">
+      <DependentUpon>MercatorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MercatorModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,13 +68,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="MercatorModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MercatorModel.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

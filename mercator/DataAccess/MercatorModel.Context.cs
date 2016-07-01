@@ -28,6 +28,7 @@ namespace Entities
         public virtual DbSet<Compra> Compras { get; set; }
         public virtual DbSet<DetalleCompra> DetalleCompras { get; set; }
         public virtual DbSet<DetalleVenta> DetalleVentas { get; set; }
+        public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Producto> Productoes { get; set; }
         public virtual DbSet<Proveedor> Proveedors { get; set; }
         public virtual DbSet<Venta> Ventas { get; set; }

@@ -81,7 +81,8 @@ BEGIN TRY
 							PKProducto INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 							Cod_Barras VARCHAR(MAX) NOT NULL,
 							Nombre NVARCHAR(20) NOT NULL, 
-							Precio FLOAT NOT NULL,
+							P_venta MONEY NOT NULL,
+							P_compra MONEY NOT NULL,
 							Cantidad INT NOT NULL,
 							Fabricante NVARCHAR(20) NOT NULL 
 						);
@@ -174,7 +175,25 @@ BEGIN TRY
 							Monto MONEY NOT NULL
 						);
 					END
-				
+				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+						WHERE TABLE_SCHEMA = 'dbo' 
+						AND  TABLE_NAME = 'Empleados'))
+				BEGIN
+					SELECT 'Table Empleados already exists' AS 'Msg'
+				END
+				ELSE
+					BEGIN
+						 CREATE TABLE Empleados
+				(
+					DNI INT NOT NULL IDENTITY(1,1) PRIMARY  KEY,
+					Cargo NVARCHAR(30) NOT NULL,
+					Apellido VARCHAR(20) NOT NULL,
+					Nombre VARCHAR (20) NOT NULL,
+					Direccion NVARCHAR(30) NOT NULL,
+					Telefono BIGINT NOT NULL,
+					FKNum_venta INT NOT NULL REFERENCES Venta (PKNum_venta)
+				)
+					END
 				COMMIT
 			END
 		ELSE

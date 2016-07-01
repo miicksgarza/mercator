@@ -25,7 +25,8 @@ namespace Entities
         public int PKProducto { get; set; }
         public string Cod_Barras { get; set; }
         public string Nombre { get; set; }
-        public double Precio { get; set; }
+        public decimal P_venta { get; set; }
+        public decimal P_compra { get; set; }
         public int Cantidad { get; set; }
         public string Fabricante { get; set; }
     

@@ -18,6 +18,7 @@ namespace Entities
         public Venta()
         {
             this.DetalleVentas = new HashSet<DetalleVenta>();
+            this.Empleados = new HashSet<Empleado>();
         }
     
         public int PKNum_venta { get; set; }
@@ -26,5 +27,7 @@ namespace Entities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVentas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empleado> Empleados { get; set; }
     }
 }
