@@ -4,216 +4,181 @@ Description              : Script para generar la base de datos del proyecto
 Version	                 : 1.0
 Modification History	 : IS	-	Date		-	Description
                            ----		----------		----------------------------------------------------------
-						   BJPH		29/06/2016		Se agregaron las tablas y añadio FK en el script.
+						   BJPH		26/07/2016		Se cambio la base de datos.
 **************************************************************************************************************/
 
-USE master
+Use Master
+Go
+If(db_id('dbMercatorESC')Is Not Null)
+DROP DATABASE dbMercatorESC
+CREATE DATABASE dbMercatorESC
 GO
 
-DECLARE @Errormessage VARCHAR(MAX)
-
-IF NOT EXISTS(SELECT sid, name FROM MASTER..SYSLOGINS WHERE name ='MercatorAppEsc')
-	BEGIN
-		EXEC sp_addlogin 'MercatorAppEsc','ut335m3rcator'
-	END
-ELSE
-	BEGIN
-	  SET @Errormessage = 'Username already exist in database'
-	  SELECT @Errormessage AS 'Msg'
-	END
+USE dbMercatorESC
 GO
 
---CREATE DATABASE
-IF EXISTS(SELECT * FROM dbo.SYSDATABASES WHERE name = 'dbMercatorESC_UAT')
-BEGIN
-	ALTER DATABASE [dbMercatorESC_UAT] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
-	USE master
-	DROP DATABASE dbMercatorESC_UAT
-	CREATE DATABASE dbMercatorESC_UAT
-END
-ELSE
-	BEGIN
-		CREATE DATABASE dbMercatorESC_UAT
-	END
+CREATE TABLE Categoria
+(IdCategoria INT IDENTITY PRIMARY KEY,
+Descripcion VARCHAR(50) NOT NULL
+)
 GO
 
---USE DATABASE
-USE dbMercatorESC_UAT
+CREATE TABLE Producto
+(IdProducto INT IDENTITY PRIMARY KEY,
+IdCategoria INT NOT NULL REFERENCES Categoria,
+Nombre VARCHAR(50) NOT NULL,
+Marca VARCHAR(80),
+Stock INT NOT NULL,
+PrecioCompra DECIMAL(6,2) NOT NULL,
+PrecioVenta DECIMAL(6,2) NOT NULL,
+FechaVencimiento DATE,
+Foto IMAGE NULL
+)
 GO
 
---DECLARE VARIABLES
-DECLARE @Errormessage VARCHAR(MAX)
+ CREATE TABLE Proveedor
+(IdProveedor INT IDENTITY PRIMARY  KEY,
+NombreProv NVARCHAR(30) NOT NULL,
+Direccion VARCHAR(80) NOT NULL,
+Telefono BIGINT NOT NULL
+)
 
---VIEW USERNAMES FOR DATABASE ACTUALLY
 
-IF NOT EXISTS(SELECT uid, name sid FROM SYSUSERS WHERE name = 'MercatorAppESC' AND islogin = 1)
-BEGIN
+CREATE TABLE Empleado
+(IdEmpleado INT IDENTITY PRIMARY KEY,
+Dni CHAR(8) NOT NULL,
+Apellido VARCHAR(30) NOT NULL,
+Nombre VARCHAR(30) NOT NULL,
+Sexo CHAR(1) NOT NULL,
+FechaNac DATE NOT NULL,
+Direccion VARCHAR(80) NOT NULL,
+EstadoCivil CHAR(1) NOT NULL
+)
+Go
 
---CREATE LOGIN
-CREATE USER MercatorAppESC FOR LOGIN MercatorAppESC
+CREATE TABLE Compra
+(IdCompra INT IDENTITY PRIMARY KEY,
+FKIdEmpleado INT NOT NULL REFERENCES Empleado,
+TipoDocumento VARCHAR(7) CHECK(TipoDocumento In('Factura')),
+Serie CHAR(5) NOT NULL,
+NroDocumento CHAR(7) NOT NULL,
+FechaVenta  DATE NOT NULL,
+Total  MONEY NOT NULL
+)
+GO
 
---ADD ROLES TO USER
-EXEC sp_addrolemember 'db_owner', 'MercatorAppESC'
-EXEC sp_addrolemember 'db_accessadmin','MercatorAppESC'
+CREATE TABLE DetalleCompra
+(IdDetalleCompra INT IDENTITY PRIMARY KEY,
+FKIdProducto INT NOT NULL REFERENCES Producto,
+IdCompra INT NOT NULL REFERENCES Compra,
+Cantidad INT NOT NULL,
+PrecioUnitario DECIMAL(6,2) NOT NULL,
+IVA MONEY NOT NULL,
+SubTotal MONEY NOT NULL
+)
+GO
 
-END
+CREATE TABLE Venta
+(IdVenta INT IDENTITY PRIMARY KEY,
+FechaVenta DATE NOT NULL,
+Serie INT NOT NULL,
+Nro_Doc INT NOT NULL,
+Total MONEY NOT NULL
+)
+GO
 
-ELSE
-	BEGIN
-		SET @Errormessage = 'Username already exist in server'
-		SELECT @Errormessage AS 'Msg'
-END
+CREATE TABLE DetalleVenta
+(
+IdDetalleVenta INT IDENTITY PRIMARY KEY,
+FKIdProducto2 INT NOT NULL REFERENCES Producto,
+FKIdVenta INT NOT NULL REFERENCES Venta,
+Cantidad INT NOT NULL,
+PrecioUnitario Decimal (6,2)NOT NULL,
+IVA Money NOT NULL,
+SubTotal money NOT NULL,)
 
-BEGIN TRY
-	BEGIN TRAN
-		IF EXISTS(SELECT * FROM dbo.SYSDATABASES WHERE name = 'dbMercatorESC_UAT' )
-		BEGIN		
-			IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'Producto'))
-				BEGIN
-					SELECT 'Table Producto already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						CREATE TABLE Producto
-						(
-							PKProducto INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-							Cod_Barras VARCHAR(MAX) NOT NULL,
-							Nombre NVARCHAR(20) NOT NULL, 
-							P_venta MONEY NOT NULL,
-							P_compra MONEY NOT NULL,
-							Cantidad INT NOT NULL,
-							Fabricante NVARCHAR(20) NOT NULL 
-						);
-					END
+CREATE TABLE Datos
+(IdDatos INT IDENTITY PRIMARY KEY,
+Nombre VARCHAR (80) NOT NULL,
+Localidad VARCHAR (100)NOT NULL,
+Telefono BIGINT NOT NULL,
+Horario TIME NOT NULL,
+) 
 
-			IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'Proveedor'))
-				BEGIN
-					SELECT 'Table Proveedor already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						 CREATE TABLE Proveedor
-				(
-				PKNum_proveedor INT NOT NULL IDENTITY(1,1) PRIMARY  KEY,
-				Nom_provedor NVARCHAR(30) NOT NULL,
-				FKNum_proveedor INT NOT NULL REFERENCES Producto (PKProducto)
-				)
-					END
-						
+CREATE TABLE Usuario
+(IdUsuario INT IDENTITY PRIMARY KEY,
+FKIdEmpleado1 INT NOT NULL REFERENCES Empleado,
+Usuario VARCHAR(20) NOT NULL,
+Contraseña VARCHAR(12) NOT NULL
+)
+Go
 
-				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'Venta'))
-				BEGIN
-					SELECT 'Table Venta already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						 CREATE TABLE Venta
-				(
-				 PKNum_venta INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
-				 Fecha DATETIME NOT NULL,
-				 Total DECIMAL(11,2) NOT NULL,
-				 
-				)
-					END	
-				
-				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'DetalleVenta'))
-				BEGIN
-					SELECT 'Table DetalleVenta already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						CREATE TABLE DetalleVenta
-						(
-							PKId_detalle INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-							FKNum_venta INT NOT NULL REFERENCES Venta (PKNum_venta),
-				            FKProducto INT NOT NULL REFERENCES Producto (PKProducto),
-							Cantidad INT NOT NULL,
-							Precio MONEY NOT NULL,
-							Subtotal DECIMAL (11,2) NOT NULL 
-						);
-					END
 
-				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'Compra'))
-				BEGIN
-					SELECT 'Table Compra already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						CREATE TABLE Compra
-						(
-							 PKNum_compra INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-							 FKNum_proveedor INT NOT NULL REFERENCES Proveedor (PKNum_proveedor),
-							 Empleado VARCHAR(40)  NOT NULL,
-							 Fecha_rec DATETIME NOT NULL
-						);
-					END
-				
-				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'DetalleCompra'))
-				BEGIN
-					SELECT 'Table DetalleCompra already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						CREATE TABLE DetalleCompra
-						(	
-							PKId_detallecompra INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-							FKNum_compra INT NOT NULL REFERENCES Compra (PKNum_compra),
-							FKProducto1 INT NOT NULL REFERENCES Producto (PKProducto),
-							Cantidad INT NOT NULL,
-							Monto MONEY NOT NULL
-						);
-					END
-				IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-						WHERE TABLE_SCHEMA = 'dbo' 
-						AND  TABLE_NAME = 'Empleados'))
-				BEGIN
-					SELECT 'Table Empleados already exists' AS 'Msg'
-				END
-				ELSE
-					BEGIN
-						 CREATE TABLE Empleados
-				(
-					DNI INT NOT NULL IDENTITY(1,1) PRIMARY  KEY,
-					Cargo NVARCHAR(30) NOT NULL,
-					Apellido VARCHAR(20) NOT NULL,
-					Nombre VARCHAR (20) NOT NULL,
-					Direccion NVARCHAR(30) NOT NULL,
-					Telefono BIGINT NOT NULL,
-					FKNum_venta INT NOT NULL REFERENCES Venta (PKNum_venta)
-				)
-					END
-				COMMIT
-			END
-		ELSE
-			BEGIN
-					
-				ROLLBACK
-					
-				SET @Errormessage = 'Database not exist'
-				RAISERROR(@Errormessage,16,1);
-			END
-END TRY
-BEGIN CATCH
-	
-	SELECT  @Errormessage = 'Error: ' + CAST(ERROR_NUMBER() AS NVARCHAR) + ' -> ' + ERROR_MESSAGE() + '. Error Line: *' + CAST(ERROR_LINE() AS VARCHAR(50)) + '*.'; 
-	
-	--SELECT  @Errormessage AS Msg;
-	
-	RAISERROR(@Errormessage,16,1);
-	
-	IF(@@TRANCOUNT > 0)
-		ROLLBACK
-		
-END CATCH
+Create Proc [Serie Documento]
+@Serie char(5) out
+as begin
+Set @Serie='00001'
+end
+go
+
+Create Procedure [Numero Correlativo]
+@TipoDocumento Varchar(7),
+@NroCorrelativo Char(7)Out
+As Begin
+	Declare @Cant Int
+	If(@TipoDocumento='Factura')
+	Begin
+	Select @Cant=Count(*)+1 From Compra where TipoDocumento='Factura'
+		If @Cant<10
+			Set @NroCorrelativo='000000'+Ltrim(Str(@Cant))
+		Else
+			If @Cant<100
+				Set @NroCorrelativo='00000'+Ltrim(Str(@Cant))
+			Else
+				If @Cant<1000
+					Set @NroCorrelativo='0000'+Ltrim(Str(@Cant))
+				Else
+					If(@Cant<10000)
+						Set @NroCorrelativo='000'+LTRIM(STR(@Cant))
+					Else
+						If(@Cant<100000)
+							Set @NroCorrelativo='00'+LTRIM(STR(@Cant))
+						Else
+							If(@Cant<1000000)
+								Set @NroCorrelativo='0'+LTRIM(str(@Cant))
+							Else
+								If(@Cant<10000000)
+									Set @NroCorrelativo=LTRIM(str(@Cant))
+									
+	End
+
+	End
+
+	GO
+
+
+
+
+
+Create Proc IniciarSesion
+@Usuario Varchar(20),
+@Contraseña Varchar(12),
+@Mensaje Varchar(50) Out
+As Begin
+	Declare @Empleado Varchar(50)
+	If(Not Exists(Select Usuario From Usuario Where Usuario=@Usuario))
+		Set @Mensaje='El Nombre de Usuario no Existe.'
+		Else Begin
+			If(Not Exists(Select Contraseña From Usuario Where Contraseña=@Contraseña))
+				Set @Mensaje='Su Contraseña es Incorrecta.'
+				Else Begin
+					Set @Empleado=(Select E.Nombre+', '+E.Apellido From Empleado E Inner Join Usuario U 
+								   On E.IdEmpleado=U.FKIdEmpleado1 Where U.Usuario=@Usuario)
+					    Begin
+					Select Usuario,Contraseña From Usuario Where Usuario=@Usuario And Contraseña=@Contraseña
+							Set @Mensaje='Bienvenido Sr(a): '+@Empleado+'.'
+						End
+				  End
+		   End
+   End
+Go
