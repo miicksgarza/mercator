@@ -19,22 +19,22 @@ namespace Entities
         {
             this.DetalleCompras = new HashSet<DetalleCompra>();
             this.DetalleVentas = new HashSet<DetalleVenta>();
-            this.Proveedors = new HashSet<Proveedor>();
         }
     
-        public int PKProducto { get; set; }
-        public string Cod_Barras { get; set; }
+        public int IdProducto { get; set; }
+        public int IdCategoria { get; set; }
         public string Nombre { get; set; }
-        public decimal P_venta { get; set; }
-        public decimal P_compra { get; set; }
-        public int Cantidad { get; set; }
-        public string Fabricante { get; set; }
+        public string Marca { get; set; }
+        public int Stock { get; set; }
+        public decimal PrecioCompra { get; set; }
+        public decimal PrecioVenta { get; set; }
+        public Nullable<System.DateTime> FechaVencimiento { get; set; }
+        public byte[] Foto { get; set; }
     
+        public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleCompra> DetalleCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVentas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedor> Proveedors { get; set; }
     }
 }

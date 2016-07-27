@@ -50,20 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompraDAL.cs" />
     <Compile Include="EmpleadoDAL.cs" />
-    <Compile Include="MercatorModel.Context.cs">
+    <Compile Include="mercatorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MercatorModel.Context.tt</DependentUpon>
+      <DependentUpon>mercatorModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="MercatorModel.Designer.cs">
+    <Compile Include="mercatorModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MercatorModel.edmx</DependentUpon>
+      <DependentUpon>mercatorModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ProductoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorDAL.cs" />
+    <Compile Include="VentaDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj">
@@ -73,18 +75,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="MercatorModel.edmx">
+    <EntityDeploy Include="mercatorModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MercatorModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>mercatorModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="MercatorModel.Context.tt">
+    <None Include="mercatorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MercatorModel.edmx</DependentUpon>
-      <LastGenOutput>MercatorModel.Context.cs</LastGenOutput>
+      <DependentUpon>mercatorModel.edmx</DependentUpon>
+      <LastGenOutput>mercatorModel.Context.cs</LastGenOutput>
       <CustomToolNamespace>Entities</CustomToolNamespace>
     </None>
-    <None Include="MercatorModel.edmx.diagram">
-      <DependentUpon>MercatorModel.edmx</DependentUpon>
+    <None Include="mercatorModel.edmx.diagram">
+      <DependentUpon>mercatorModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

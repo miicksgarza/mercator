@@ -12,17 +12,12 @@ namespace Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleVenta
+    public partial class sysdiagram
     {
-        public int IdDetalleVenta { get; set; }
-        public int FKIdProducto2 { get; set; }
-        public int FKIdVenta { get; set; }
-        public int Cantidad { get; set; }
-        public decimal PrecioUnitario { get; set; }
-        public decimal IVA { get; set; }
-        public decimal SubTotal { get; set; }
-    
-        public virtual Producto Producto { get; set; }
-        public virtual Venta Venta { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

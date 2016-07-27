@@ -14,13 +14,17 @@ namespace Entities
     
     public partial class DetalleCompra
     {
-        public int PKId_detallecompra { get; set; }
-        public int FKNum_compra { get; set; }
-        public int FKProducto1 { get; set; }
+        public int IdDetalleCompra { get; set; }
+        public int FKIdProducto { get; set; }
+        public int FKIdProveedor { get; set; }
+        public int IdCompra { get; set; }
         public int Cantidad { get; set; }
-        public decimal Monto { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal IVA { get; set; }
+        public decimal SubTotal { get; set; }
     
         public virtual Compra Compra { get; set; }
         public virtual Producto Producto { get; set; }
+        public virtual Proveedor Proveedor { get; set; }
     }
 }

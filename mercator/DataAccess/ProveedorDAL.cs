@@ -52,7 +52,7 @@ namespace DataAccess
             using (var db = new MercatorEntities())
             {
                 var query = (from p in db.Proveedors
-                             where p.PKNum_proveedor == Numproveedor
+                             where p.IdProveedor == Numproveedor
                              select p).Single();
 
                 return query;
@@ -119,7 +119,7 @@ namespace DataAccess
                 using (var db = new MercatorEntities())
                 {
                     var query = (from p in db.Proveedors
-                                 where p.PKNum_proveedor == Numproveedor
+                                 where p.IdProveedor == Numproveedor
                                  select p).Single();
 
                     db.Proveedors.Remove(query);

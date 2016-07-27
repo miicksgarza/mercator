@@ -12,24 +12,18 @@ namespace Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Compra
+    public partial class Categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Compra()
+        public Categoria()
         {
-            this.DetalleCompras = new HashSet<DetalleCompra>();
+            this.Productoes = new HashSet<Producto>();
         }
     
-        public int IdCompra { get; set; }
-        public int FKIdEmpleado { get; set; }
-        public string TipoDocumento { get; set; }
-        public string Serie { get; set; }
-        public string NroDocumento { get; set; }
-        public System.DateTime FechaVenta { get; set; }
-        public decimal Total { get; set; }
+        public int IdCategoria { get; set; }
+        public string Descripcion { get; set; }
     
-        public virtual Empleado Empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleCompra> DetalleCompras { get; set; }
+        public virtual ICollection<Producto> Productoes { get; set; }
     }
 }

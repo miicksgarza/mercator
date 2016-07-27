@@ -17,15 +17,15 @@ namespace Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedor()
         {
-            this.Compras = new HashSet<Compra>();
+            this.DetalleCompras = new HashSet<DetalleCompra>();
         }
     
-        public int PKNum_proveedor { get; set; }
-        public string Nom_provedor { get; set; }
-        public int FKNum_proveedor { get; set; }
+        public int IdProveedor { get; set; }
+        public string NombreProv { get; set; }
+        public string Direccion { get; set; }
+        public long Telefono { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Compra> Compras { get; set; }
-        public virtual Producto Producto { get; set; }
+        public virtual ICollection<DetalleCompra> DetalleCompras { get; set; }
     }
 }

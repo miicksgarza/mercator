@@ -12,17 +12,12 @@ namespace Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleVenta
+    public partial class Dato
     {
-        public int IdDetalleVenta { get; set; }
-        public int FKIdProducto2 { get; set; }
-        public int FKIdVenta { get; set; }
-        public int Cantidad { get; set; }
-        public decimal PrecioUnitario { get; set; }
-        public decimal IVA { get; set; }
-        public decimal SubTotal { get; set; }
-    
-        public virtual Producto Producto { get; set; }
-        public virtual Venta Venta { get; set; }
+        public int IdDatos { get; set; }
+        public string Nombre { get; set; }
+        public string Localidad { get; set; }
+        public long Telefono { get; set; }
+        public System.TimeSpan Horario { get; set; }
     }
 }

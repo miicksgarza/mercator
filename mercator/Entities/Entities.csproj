@@ -39,41 +39,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categoria.cs">
+      <DependentUpon>mercatorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Compra.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dato.cs">
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DetalleCompra.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DetalleVenta.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Empleado.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MercatorModel.cs">
+    <Compile Include="mercatorModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Producto.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>mercatorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">
-      <DependentUpon>MercatorModel.tt</DependentUpon>
+      <DependentUpon>mercatorModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MercatorModel.tt">
+    <None Include="mercatorModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MercatorModel.cs</LastGenOutput>
+      <LastGenOutput>mercatorModel.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

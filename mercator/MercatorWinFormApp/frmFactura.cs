@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MercatorWinFormApp
 {
-    public partial class frmRegistro : Form
+    public partial class frmFactura : Form
     {
-        public frmRegistro()
+        public frmFactura()
         {
             InitializeComponent();
         }

@@ -70,6 +70,7 @@ GO
 CREATE TABLE DetalleCompra
 (IdDetalleCompra INT IDENTITY PRIMARY KEY,
 FKIdProducto INT NOT NULL REFERENCES Producto,
+FKIdProveedor INT NOT NULL REFERENCES Proveedor,
 IdCompra INT NOT NULL REFERENCES Compra,
 Cantidad INT NOT NULL,
 PrecioUnitario DECIMAL(6,2) NOT NULL,

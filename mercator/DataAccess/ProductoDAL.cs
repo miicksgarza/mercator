@@ -51,12 +51,12 @@ namespace DataAccess
 
         //READ BY ID
 
-        public static Producto getProductoById(int PKProducto)
+        public static Producto getProductoById(int IdProducto)
         {
             using (var db = new MercatorEntities())
             {
                 var query = (from p in db.Productoes
-                             where p.PKProducto == PKProducto
+                             where p.IdProducto == IdProducto
                              select p).Single();
 
                 return query;
@@ -123,7 +123,7 @@ namespace DataAccess
                 using (var db = new MercatorEntities())
                 {
                     var query = (from p in db.Productoes
-                                 where p.PKProducto == IdProducto
+                                 where p.IdProducto == IdProducto
                                  select p).Single();
 
                     db.Productoes.Remove(query);

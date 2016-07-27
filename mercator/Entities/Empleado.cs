@@ -14,14 +14,25 @@ namespace Entities
     
     public partial class Empleado
     {
-        public int DNI { get; set; }
-        public string Cargo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Empleado()
+        {
+            this.Compras = new HashSet<Compra>();
+            this.Usuarios = new HashSet<Usuario>();
+        }
+    
+        public int IdEmpleado { get; set; }
+        public string Dni { get; set; }
         public string Apellido { get; set; }
         public string Nombre { get; set; }
+        public string Sexo { get; set; }
+        public System.DateTime FechaNac { get; set; }
         public string Direccion { get; set; }
-        public long Telefono { get; set; }
-        public int FKNum_venta { get; set; }
+        public string EstadoCivil { get; set; }
     
-        public virtual Venta Venta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Compra> Compras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

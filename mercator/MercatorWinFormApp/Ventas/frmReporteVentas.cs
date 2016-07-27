@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MercatorWinFormApp
+namespace MercatorWinFormApp.Ventas
 {
-    public partial class frmLogin : Form
+    public partial class frmReporteVentas : Form
     {
-        public frmLogin()
+        public frmReporteVentas()
         {
             InitializeComponent();
-        }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
