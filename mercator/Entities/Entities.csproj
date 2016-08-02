@@ -40,52 +40,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categoria.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Compra.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dato.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DetalleCompra.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DetalleVenta.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Empleado.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="mercatorModel.cs">
+    <Compile Include="MercatorModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Producto.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">
-      <DependentUpon>mercatorModel.tt</DependentUpon>
+      <DependentUpon>MercatorModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mercatorModel.tt">
+    <None Include="MercatorModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>mercatorModel.cs</LastGenOutput>
+      <LastGenOutput>MercatorModel.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

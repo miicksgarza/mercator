@@ -52,19 +52,20 @@
   <ItemGroup>
     <Compile Include="CompraDAL.cs" />
     <Compile Include="EmpleadoDAL.cs" />
-    <Compile Include="mercatorModel.Context.cs">
+    <Compile Include="MercatorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mercatorModel.Context.tt</DependentUpon>
+      <DependentUpon>MercatorModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="mercatorModel.Designer.cs">
+    <Compile Include="MercatorModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mercatorModel.edmx</DependentUpon>
+      <DependentUpon>MercatorModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ProductoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorDAL.cs" />
+    <Compile Include="UsuarioDAL.cs" />
     <Compile Include="VentaDAL.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,18 +76,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="mercatorModel.edmx">
+    <EntityDeploy Include="MercatorModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>mercatorModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MercatorModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="mercatorModel.Context.tt">
+    <None Include="MercatorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mercatorModel.edmx</DependentUpon>
-      <LastGenOutput>mercatorModel.Context.cs</LastGenOutput>
+      <DependentUpon>MercatorModel.edmx</DependentUpon>
+      <LastGenOutput>MercatorModel.Context.cs</LastGenOutput>
       <CustomToolNamespace>Entities</CustomToolNamespace>
     </None>
-    <None Include="mercatorModel.edmx.diagram">
-      <DependentUpon>mercatorModel.edmx</DependentUpon>
+    <None Include="MercatorModel.edmx.diagram">
+      <DependentUpon>MercatorModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

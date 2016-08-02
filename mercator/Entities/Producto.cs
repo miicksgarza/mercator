@@ -30,6 +30,7 @@ namespace Entities
         public decimal PrecioVenta { get; set; }
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
         public byte[] Foto { get; set; }
+        public string CodigoBarra { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

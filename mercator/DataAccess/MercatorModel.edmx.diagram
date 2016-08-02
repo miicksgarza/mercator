@@ -4,26 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f48a69c49dc44ddeab5ffa91e2746a3b" Name="Diagram1">
+      <Diagram DiagramId="a1672c06baa74d1789bda79410770afc" Name="Diagram1">
         <EntityTypeShape EntityType="MercatorModel.Categoria" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MercatorModel.Compra" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MercatorModel.Dato" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MercatorModel.DetalleCompra" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MercatorModel.DetalleVenta" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MercatorModel.Empleado" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MercatorModel.Producto" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MercatorModel.Proveedor" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MercatorModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MercatorModel.Usuario" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MercatorModel.Empleado" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MercatorModel.Producto" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MercatorModel.Proveedor" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MercatorModel.Usuario" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="MercatorModel.Venta" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="MercatorModel.FK__Producto__IdCate__1CF15040" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__Compra__FKIdEmpl__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__DetalleCo__IdCom__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__DetalleCo__FKIdP__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__DetalleCo__FKIdP__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__DetalleVe__FKIdP__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__DetalleVe__FKIdV__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="MercatorModel.FK__Usuario__FKIdEmp__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__Producto__IdCate__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__Compra__FKIdEmpl__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__DetalleCo__IdCom__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__DetalleCo__FKIdP__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__DetalleCo__FKIdP__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__DetalleVe__FKIdP__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__DetalleVe__FKIdV__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="MercatorModel.FK__Usuario__FKIdEmp__29572725" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

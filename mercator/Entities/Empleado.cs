@@ -28,7 +28,6 @@ namespace Entities
         public string Sexo { get; set; }
         public System.DateTime FechaNac { get; set; }
         public string Direccion { get; set; }
-        public string EstadoCivil { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Compra> Compras { get; set; }

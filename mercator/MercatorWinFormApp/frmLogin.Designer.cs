@@ -37,15 +37,15 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.tlpContenedor = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.grbTextbox = new System.Windows.Forms.GroupBox();
+            this.grbBotones = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnIngresar = new System.Windows.Forms.Button();
+            this.grbTextbox = new System.Windows.Forms.GroupBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.grbBotones = new System.Windows.Forms.GroupBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.tlpLogin.SuspendLayout();
             this.tlpDiseño.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,9 +54,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.tlpContenedor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            this.grbTextbox.SuspendLayout();
             this.grbBotones.SuspendLayout();
+            this.grbTextbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpLogin
@@ -168,33 +168,17 @@
             this.tlpContenedor.Size = new System.Drawing.Size(491, 466);
             this.tlpContenedor.TabIndex = 1;
             // 
-            // pictureBox6
+            // grbBotones
             // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(485, 111);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 0;
-            this.pictureBox6.TabStop = false;
-            // 
-            // grbTextbox
-            // 
-            this.grbTextbox.Controls.Add(this.txtPassword);
-            this.grbTextbox.Controls.Add(this.txtUser);
-            this.grbTextbox.Controls.Add(this.label2);
-            this.grbTextbox.Controls.Add(this.label1);
-            this.grbTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grbTextbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grbTextbox.Font = new System.Drawing.Font("Rockwell", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grbTextbox.Location = new System.Drawing.Point(4, 150);
-            this.grbTextbox.Margin = new System.Windows.Forms.Padding(4);
-            this.grbTextbox.Name = "grbTextbox";
-            this.grbTextbox.Padding = new System.Windows.Forms.Padding(4);
-            this.grbTextbox.Size = new System.Drawing.Size(483, 193);
-            this.grbTextbox.TabIndex = 4;
-            this.grbTextbox.TabStop = false;
-            this.grbTextbox.Text = "Iniciar Sesión";
+            this.grbBotones.Controls.Add(this.btnCancelar);
+            this.grbBotones.Controls.Add(this.btnIngresar);
+            this.grbBotones.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grbBotones.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.grbBotones.Location = new System.Drawing.Point(3, 350);
+            this.grbBotones.Name = "grbBotones";
+            this.grbBotones.Size = new System.Drawing.Size(485, 72);
+            this.grbBotones.TabIndex = 6;
+            this.grbBotones.TabStop = false;
             // 
             // btnCancelar
             // 
@@ -223,6 +207,25 @@
             this.btnIngresar.Text = "&Ingresar";
             this.btnIngresar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
+            // 
+            // grbTextbox
+            // 
+            this.grbTextbox.Controls.Add(this.txtPassword);
+            this.grbTextbox.Controls.Add(this.txtUser);
+            this.grbTextbox.Controls.Add(this.label2);
+            this.grbTextbox.Controls.Add(this.label1);
+            this.grbTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grbTextbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grbTextbox.Font = new System.Drawing.Font("Rockwell", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbTextbox.Location = new System.Drawing.Point(4, 150);
+            this.grbTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.grbTextbox.Name = "grbTextbox";
+            this.grbTextbox.Padding = new System.Windows.Forms.Padding(4);
+            this.grbTextbox.Size = new System.Drawing.Size(483, 193);
+            this.grbTextbox.TabIndex = 4;
+            this.grbTextbox.TabStop = false;
+            this.grbTextbox.Text = "Iniciar Sesión";
             // 
             // txtPassword
             // 
@@ -267,17 +270,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Usuario:";
             // 
-            // grbBotones
+            // pictureBox6
             // 
-            this.grbBotones.Controls.Add(this.btnCancelar);
-            this.grbBotones.Controls.Add(this.btnIngresar);
-            this.grbBotones.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grbBotones.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.grbBotones.Location = new System.Drawing.Point(3, 350);
-            this.grbBotones.Name = "grbBotones";
-            this.grbBotones.Size = new System.Drawing.Size(485, 72);
-            this.grbBotones.TabIndex = 6;
-            this.grbBotones.TabStop = false;
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(485, 111);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
             // 
             // frmLogin
             // 
@@ -305,10 +306,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.tlpContenedor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.grbBotones.ResumeLayout(false);
             this.grbTextbox.ResumeLayout(false);
             this.grbTextbox.PerformLayout();
-            this.grbBotones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }

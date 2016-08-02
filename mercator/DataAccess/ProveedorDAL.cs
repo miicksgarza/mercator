@@ -11,6 +11,7 @@ namespace DataAccess
     public class ProveedorDAL
     {
 
+        #region Guardar proveedor
         //CREATE
         public static bool createProveedor(Proveedor prov)
         {
@@ -40,29 +41,28 @@ namespace DataAccess
             return false;
 
         }
+        #endregion
 
 
+        #region Consultar proveedor
+        //READ BY NAME
 
-
-
-        //READ BY ID
-
-        public static Proveedor getProveedorById(int Numproveedor)
+        public static Proveedor getProveedorById(string proveedor)
         {
             using (var db = new MercatorEntities())
             {
                 var query = (from p in db.Proveedors
-                             where p.IdProveedor == Numproveedor
+                             where p.NombreProv == proveedor
                              select p).Single();
 
                 return query;
             }
 
         }
+        #endregion
 
 
-
-
+        #region Mostrar proveedores
         //READ ALL
         public static List<Proveedor> getProveedores()
         {
@@ -75,10 +75,10 @@ namespace DataAccess
             }
         }
 
+        #endregion
 
 
-
-
+        #region Actualizar proveedor
         //UPDATE
 
         public static bool updateProveedor(Proveedor prov)
@@ -109,17 +109,20 @@ namespace DataAccess
 
 
         }
+        #endregion
 
+
+        #region Borrar proveedor
         //DELETE
 
-        public static bool deleteProveedor(int Numproveedor)
+        public static bool deleteProveedor(string proveedor)
         {
             try
             {
                 using (var db = new MercatorEntities())
                 {
                     var query = (from p in db.Proveedors
-                                 where p.IdProveedor == Numproveedor
+                                 where p.NombreProv == proveedor
                                  select p).Single();
 
                     db.Proveedors.Remove(query);
@@ -143,5 +146,6 @@ namespace DataAccess
             return false;
 
         }
+        #endregion
     }
 }

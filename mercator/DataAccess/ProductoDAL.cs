@@ -14,7 +14,7 @@ namespace DataAccess
     public class ProductoDAL
     {
 
-
+        #region RegistrarProducto
         //CREATE
         public static bool createProducto(Producto producto)
         {
@@ -44,29 +44,26 @@ namespace DataAccess
             return false;
 
         }
+        #endregion
 
-
-
-
-
+        #region BuscarProductos
         //READ BY ID
 
-        public static Producto getProductoById(int IdProducto)
+        public static Producto getProductoByDescription(string Description)
         {
             using (var db = new MercatorEntities())
             {
                 var query = (from p in db.Productoes
-                             where p.IdProducto == IdProducto
+                             where p.Nombre == Description
                              select p).Single();
 
                 return query;
             }
 
         }
+        #endregion
 
-
-
-
+        #region MostrarProductos
         //READ ALL
         public static List<Producto> getProductos()
         {
@@ -78,11 +75,9 @@ namespace DataAccess
                 return query;
             }
         }
+        #endregion
 
-
-
-
-
+        #region ActualizarProductos
         //UPDATE
 
         public static bool updateProducto(Producto producto)
@@ -113,7 +108,9 @@ namespace DataAccess
 
 
         }
+        #endregion
 
+        #region BorrarProductos
         //DELETE
 
         public static bool deleteProducto(int IdProducto)
@@ -147,7 +144,7 @@ namespace DataAccess
             return false;
 
         }
-
+        #endregion
 
     }
 }
