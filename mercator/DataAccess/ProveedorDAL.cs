@@ -47,7 +47,7 @@ namespace DataAccess
         #region Consultar proveedor
         //READ BY NAME
 
-        public static Proveedor getProveedorById(string proveedor)
+        public static Proveedor getProveedorByName(string proveedor)
         {
             using (var db = new MercatorEntities())
             {

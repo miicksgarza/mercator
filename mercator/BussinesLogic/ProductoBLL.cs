@@ -16,10 +16,10 @@ namespace BussinesLogic
             return ProductoDAL.createProducto(producto);
         }
 
-        //READ BY ID PRODUCTO
-        public static Producto getProductoById(int PKProducto)
+        //READ BY DESCRIPCION PRODUCTO
+        public static Producto getProductoByDescription(string Description)
         {
-            return ProductoDAL.getProductoById(PKProducto);
+            return ProductoDAL.getProductoByDescription(Description);
         }
 
         //READ ALL TABLE PRODUCTO

@@ -17,9 +17,9 @@ namespace BussinesLogic
         }
 
         //READ BY ID EMPLEADO
-        public static Empleado getEmpleadoById(int dni)
+        public static Empleado getEmpleadoByName(string name)
         {
-            return EmpleadoDAL.getEmpleadoById(dni);
+            return EmpleadoDAL.getEmpleadoByName(name);
         }
         //READ ALL TABLE EMPLEADO
         public static List<Empleado> getEmpleados()
@@ -32,9 +32,9 @@ namespace BussinesLogic
             return EmpleadoDAL.updateEmpleado(emp);
         }
         //DELETE EMPLEADOS
-        public static bool deleteEmpleado(int dni)
+        public static bool deleteEmpleado(string apellido)
         {
-            return EmpleadoDAL.deleteEmpleado(dni);
+            return EmpleadoDAL.deleteEmpleado(apellido);
         }
     }
 }

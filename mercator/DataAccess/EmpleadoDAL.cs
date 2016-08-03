@@ -46,7 +46,7 @@ namespace DataAccess
 
         //READ BY ID
 
-        public static Empleado getEmpleadoById(string name)
+        public static Empleado getEmpleadoByName(string name)
         {
             using (var db = new MercatorEntities())
             {
