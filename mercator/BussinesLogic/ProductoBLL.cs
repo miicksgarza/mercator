@@ -17,9 +17,9 @@ namespace BussinesLogic
         }
 
         //READ BY DESCRIPCION PRODUCTO
-        public static Producto getProductoByDescription(string Description)
+        public static Producto getProductoByDescription(int id)
         {
-            return ProductoDAL.getProductoByDescription(Description);
+            return ProductoDAL.getProductoByDescription(id);
         }
 
         //READ ALL TABLE PRODUCTO
@@ -35,9 +35,9 @@ namespace BussinesLogic
         }
 
         //DELETE PRODUCTOS
-        public static bool deleteProducto(int IdProducto)
+        public static bool deleteProducto(int id)
         {
-            return ProductoDAL.deleteProducto(IdProducto);
+            return ProductoDAL.deleteProducto(id);
         }
 
 

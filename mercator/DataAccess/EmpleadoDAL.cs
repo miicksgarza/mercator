@@ -46,12 +46,12 @@ namespace DataAccess
 
         //READ BY ID
 
-        public static Empleado getEmpleadoByName(string name)
+        public static Empleado getEmpleadoByName(int id)
         {
             using (var db = new MercatorEntities())
             {
                 var query = (from e in db.Empleadoes
-                             where e.Nombre == name
+                             where e.IdEmpleado== id
                              select e).Single();
 
                 return query;
@@ -111,14 +111,14 @@ namespace DataAccess
 
         //DELETE
 
-        public static bool deleteEmpleado(string apellido)
+        public static bool deleteEmpleado(int id)
         {
             try
             {
                 using (var db = new MercatorEntities())
                 {
                     var query = (from e in db.Empleadoes
-                                 where e.Apellido == apellido
+                                 where e.IdEmpleado == id
                                  select e).Single();
 
                     db.Empleadoes.Remove(query);

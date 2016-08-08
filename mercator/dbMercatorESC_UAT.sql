@@ -125,6 +125,7 @@ Contraseña VARCHAR(12) NOT NULL
 Go
 
 
+
 Create Proc [Serie Documento]
 @Serie char(5) out
 as begin

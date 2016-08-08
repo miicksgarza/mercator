@@ -17,9 +17,10 @@ namespace MercatorWinFormApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLogin());
-           // Application.Run(new frmMercator());
-            Application.Run(new frmMantenimiento());
+            Application.Run(new frmLogin());
+           //Application.Run(new frmMercator());
+           //Application.Run(new frmMantenimiento());
+           
         }
     }
 }

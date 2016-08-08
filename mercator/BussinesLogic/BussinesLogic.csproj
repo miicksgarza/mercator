@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompraBLL.cs" />
+    <Compile Include="DatosBLL.cs" />
     <Compile Include="EmpleadoBLL.cs" />
+    <Compile Include="ListaCategoriaBLL.cs" />
     <Compile Include="ProductoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorBLL.cs" />

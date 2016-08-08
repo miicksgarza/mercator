@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BussinesLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,16 @@ namespace MercatorWinFormApp.Inventario
         public frmConsultaStock()
         {
             InitializeComponent();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void frmConsultaStock_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -18,6 +18,6 @@ namespace Entities
         public string Nombre { get; set; }
         public string Localidad { get; set; }
         public long Telefono { get; set; }
-        public System.TimeSpan Horario { get; set; }
+        public System.DateTime Horario { get; set; }
     }
 }

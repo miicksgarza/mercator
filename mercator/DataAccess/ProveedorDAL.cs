@@ -47,12 +47,12 @@ namespace DataAccess
         #region Consultar proveedor
         //READ BY NAME
 
-        public static Proveedor getProveedorByName(string proveedor)
+        public static Proveedor getProveedorByName(int idproveedor)
         {
             using (var db = new MercatorEntities())
             {
                 var query = (from p in db.Proveedors
-                             where p.NombreProv == proveedor
+                             where p.IdProveedor == idproveedor
                              select p).Single();
 
                 return query;
@@ -115,14 +115,14 @@ namespace DataAccess
         #region Borrar proveedor
         //DELETE
 
-        public static bool deleteProveedor(string proveedor)
+        public static bool deleteProveedor(int idproveedor)
         {
             try
             {
                 using (var db = new MercatorEntities())
                 {
                     var query = (from p in db.Proveedors
-                                 where p.NombreProv == proveedor
+                                 where p.IdProveedor == idproveedor
                                  select p).Single();
 
                     db.Proveedors.Remove(query);

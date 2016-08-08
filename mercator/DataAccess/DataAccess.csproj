@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompraDAL.cs" />
+    <Compile Include="DatosDAL.cs" />
     <Compile Include="EmpleadoDAL.cs" />
+    <Compile Include="ListaCategoriaDAL.cs" />
     <Compile Include="MercatorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BussinesLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,13 @@ namespace MercatorWinFormApp.Usuarios
         public frmConsultaUsuario()
         {
             InitializeComponent();
+
+            dgvUsuarios.DataSource = UsuarioBLL.getUsuarios();
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

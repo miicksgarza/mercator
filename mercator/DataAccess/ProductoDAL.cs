@@ -49,12 +49,12 @@ namespace DataAccess
         #region BuscarProductos
         //READ BY ID
 
-        public static Producto getProductoByDescription(string Description)
+        public static Producto getProductoByDescription(int id)
         {
             using (var db = new MercatorEntities())
             {
                 var query = (from p in db.Productoes
-                             where p.Nombre == Description
+                             where p.IdProducto == id
                              select p).Single();
 
                 return query;
@@ -113,14 +113,14 @@ namespace DataAccess
         #region BorrarProductos
         //DELETE
 
-        public static bool deleteProducto(int IdProducto)
+        public static bool deleteProducto(int id)
         {
             try
             {
                 using (var db = new MercatorEntities())
                 {
                     var query = (from p in db.Productoes
-                                 where p.IdProducto == IdProducto
+                                 where p.IdProducto == id
                                  select p).Single();
 
                     db.Productoes.Remove(query);

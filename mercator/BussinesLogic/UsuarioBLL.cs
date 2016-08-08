@@ -19,6 +19,11 @@ namespace BussinesLogic
         {
             return UsuarioDAL.loginUser(user, pass);
         }
-            
+
+
+        public static List<Usuario> getUsuarios()
+        {
+            return UsuarioDAL.getUsuarios();
+        }
     }
 }

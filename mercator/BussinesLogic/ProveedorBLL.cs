@@ -18,9 +18,9 @@ namespace BussinesLogic
         }
 
         //READ BY NAME PROVEEDOR
-        public static Proveedor getProveedorByName(string proveedor)
+        public static Proveedor getProveedorByName(int idproveedor)
         {
-            return ProveedorDAL.getProveedorByName(proveedor);
+            return ProveedorDAL.getProveedorByName(idproveedor);
         }
 
         //READ ALL TABLE PROVEEDOR
@@ -37,9 +37,9 @@ namespace BussinesLogic
         }
 
         //DELETE PROVEEDORES
-        public static bool deleteProveedor(string proveedor)
+        public static bool deleteProveedor(int idproveedor)
         {
-            return ProveedorDAL.deleteProveedor(proveedor);
+            return ProveedorDAL.deleteProveedor(idproveedor);
         }
 
     }

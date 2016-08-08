@@ -32,7 +32,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Localidad" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Telefono" Type="bigint" Nullable="false" />
-          <Property Name="Horario" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Horario" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleCompra">
           <Key>
@@ -289,7 +289,7 @@
           <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefono" Type="Int64" Nullable="false" />
-          <Property Name="Horario" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Horario" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="DetalleCompra">
           <Key>
