@@ -25,7 +25,14 @@ namespace MercatorWinFormApp.Inventario
 
         private void frmConsultaStock_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'mercatorDataSet.Producto' table. You can move, or remove it, as needed.
+            this.productoTableAdapter.Fill(this.mercatorDataSet.Producto);
+            
+        }
 
+        private void btnSalirPro_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -87,9 +87,12 @@ namespace DataAccess
                 using (var db = new MercatorEntities())
                 {
                     db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
+                    int changes = db.SaveChanges();
 
-                    return true;
+                    if (changes > 0)
+                        return true;
+                    else
+                        return false;
                 }
             }
             catch (DbEntityValidationException dbEx)
@@ -119,14 +122,17 @@ namespace DataAccess
             {
                 using (var db = new MercatorEntities())
                 {
-                    var query = (from p in db.Productoes
-                                 where p.IdProducto == id
-                                 select p).Single();
+                    // Realizamos la consulta
+                    var query = db.Productoes.Where( p => p.IdProducto == 
+                        id).First();
+ 
+                    // Eliminamos el cliente
+                    db.Productoes.Remove(query);    // Para el Framework 4.0 o inferior
+ 
+                   // Guardamos los cambios
+                   int res = db.SaveChanges();
 
-                    db.Productoes.Remove(query);
-                    db.SaveChanges();
-
-                    return true;
+                   return res > 0;
                 }
             }
             catch (DbEntityValidationException dbEx)

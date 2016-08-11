@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BussinesLogic;
+using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +18,53 @@ namespace MercatorWinFormApp
         {
             InitializeComponent();
         }
-    }
-}
+
+        private void btnGrabar_Click(object sender, EventArgs e)
+        {
+            try {
+
+                if (Program.IdEmpleado != 0)
+                {
+                    Usuario U = new Usuario();
+                    U.FKIdEmpleado1 = Program.IdEmpleado;
+                    U.Usuario1 = txtUser.Text.Trim();
+                    U.Contraseña = txtPassword.Text.Trim();
+
+                    bool IsInsert = UsuarioBLL.createUsuario(U);
+
+                    if (IsInsert)
+                    {
+                        MessageBox.Show("Se creo la cuenta del empleado.");
+
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Fallo al momento de crear.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+                    
+                      
+
+                      
+               
+           }
+        }
+    
+       
+        
+
+
+        }
+
+
+        
+    
+

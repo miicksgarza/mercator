@@ -24,49 +24,50 @@ namespace MercatorWinFormApp.Configuracion
 
         private void frmRegistrarProducto_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'mercatorDataSet.Proveedor' table. You can move, or remove it, as needed.
+            this.proveedorTableAdapter.Fill(this.mercatorDataSet.Proveedor);
 
 
             fillListaCategoria(cbxCategoria, "IdCategoria", ListaCategoriaBLL.mostrarCategoria());
-            dgvProveedor.DataSource = ProveedorBLL.getProveedores();
-            
+
+
         }
 
-        SqlCommand cmd;
-        MemoryStream ms;
-        byte[] photo_aray;
+
+
 
 
         #region Tabla Producto
         private void button2_Click(object sender, EventArgs e)
         {
-             try
+            try
             {
 
                 Producto pro = new Producto();
 
 
-             
-                pro.IdProducto = Convert.ToInt32(txtId.Text.Trim());
+
+                //pro.IdProducto = Convert.ToInt32(txtId.Text.Trim());
                 pro.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue.ToString());
-                pro.Nombre = txtNombreEmp.Text.Trim();
+                pro.Nombre = txtProducto.Text.Trim();
                 pro.Marca = txtMarca.Text.Trim();
                 pro.Stock = Convert.ToInt32(txtStock.Text.ToString());
                 pro.PrecioCompra = Convert.ToDecimal(txtPCompra.Text.ToString());
                 pro.PrecioVenta = Convert.ToDecimal(txtPVenta.Text.ToString());
                 pro.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Text.ToString());
-                conv_photo();
-                
-                
-                 
+                pro.Foto = imageToByteArray(pbImagen.Image);
 
-                    
+
+
+
+
                 bool IsInsert = ProductoBLL.createProducto(pro);
 
                 if (IsInsert)
                 {
                     MessageBox.Show("se agrego correctamente al registro.");
 
-                   
+
                 }
                 else
                 {
@@ -76,67 +77,52 @@ namespace MercatorWinFormApp.Configuracion
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
+
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
-            try
+            Producto pro = new Producto();
+
+
+            pro.IdProducto = Convert.ToInt32(txtId.Text.ToString());
+            pro.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue.ToString());
+            pro.Nombre = txtProducto.Text.Trim();
+            pro.Marca = txtMarca.Text.Trim();
+            pro.Stock = Convert.ToInt32(txtStock.Text.ToString());
+            pro.PrecioCompra = Convert.ToDecimal(txtPCompra.Text.ToString());
+            pro.PrecioVenta = Convert.ToDecimal(txtPVenta.Text.ToString());
+            pro.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value.ToString());
+            pro.Foto = imageToByteArray(pbImagen.Image);
+
+            bool IsUpdate = ProductoBLL.updateProducto(pro);
+
+            if (IsUpdate)
             {
-                Producto pro = new Producto();
-               
+                MessageBox.Show("El registro se modifico correctamente.");
 
-
-                pro.IdProducto = Convert.ToInt32(txtId.Text.Trim());
-                pro.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue.ToString());
-                pro.Nombre = txtNombreEmp.Text.Trim();
-                pro.Marca = txtMarca.Text.Trim();
-                pro.Stock = Convert.ToInt32(txtStock.Text.ToString());
-                pro.PrecioCompra = Convert.ToDecimal(txtPCompra.Text.ToString());
-                pro.PrecioVenta = Convert.ToDecimal(txtPVenta.Text.ToString());
-                pro.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value.ToString());
-                conv_photo();
-
-                bool IsUpdate = ProductoBLL.updateProducto(pro);
-
-                if (IsUpdate)
-                {
-                    MessageBox.Show("El registro se modifico correctamente.");
-
-                }
-                else
-                {
-                    MessageBox.Show("El registro no se pudo modificar .");
-                }
             }
-            catch (Exception ex)
+            else
             {
-
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("El registro no se pudo modificar .");
             }
-       
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
-                Producto pro = new Producto();
 
-                pro.IdProducto = Convert.ToInt32(txtId.Text = "");
-                pro.IdCategoria = Convert.ToInt32(cbxCategoria.Text = "");
-                pro.Nombre = txtProducto.Text = "";
-                pro.Marca = txtMarca.Text = "";
-                pro.PrecioCompra = Convert.ToDecimal(txtPCompra.Text = "");
-                pro.PrecioVenta = Convert.ToDecimal(txtPVenta.Text= "");
-                pro.Stock = Convert.ToInt32(txtStock.Text = "");
-                pro.FechaVencimiento = dateTimePicker1.Value = DateTime.Now;
-                pbImagen.Image = null;
-                txtProducto.Focus();
+                int id;
 
-                bool IsDelete = ProductoBLL.deleteProducto(pro.IdProducto);
+                id = Convert.ToInt32(txtId.Text);
+
+                ProductoBLL.getProductoByDescription(id);
+
+                bool IsDelete = ProductoBLL.deleteProducto(id);
 
                 if (IsDelete)
                 {
@@ -155,21 +141,21 @@ namespace MercatorWinFormApp.Configuracion
             }
         }
 
-       private void btnSeleccionar_Click(object sender, EventArgs e)
+        private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             OpenFileDialog.Filter = "jpeg|*.jpg|bmp|*.bmp|all files|*.*";
             DialogResult res = OpenFileDialog.ShowDialog();
             if (res == DialogResult.OK)
             {
                 pbImagen.Image = Image.FromFile(OpenFileDialog.FileName);
-            } 
+            }
         }
 
         #endregion
 
         #region Tabla Proveedor
 
-       private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -177,11 +163,11 @@ namespace MercatorWinFormApp.Configuracion
                 Proveedor prov = new Proveedor();
 
 
-                prov.IdProveedor = Convert.ToInt32(txtId.Text.Trim());
+
                 prov.NombreProv = txtNomProv.Text.Trim();
                 prov.Direccion = txtDireccionProv.Text.Trim();
                 prov.Telefono = Convert.ToInt32(txtTelefono.Text.ToString());
-                
+
 
 
 
@@ -216,11 +202,11 @@ namespace MercatorWinFormApp.Configuracion
                 Proveedor prov = new Proveedor();
 
 
-                prov.IdProveedor = Convert.ToInt32(txtId.Text.Trim());
+
                 prov.NombreProv = txtNomProv.Text.Trim();
                 prov.Direccion = txtDireccionProv.Text.Trim();
                 prov.Telefono = Convert.ToInt32(txtTelefono.Text.ToString());
-            
+
                 bool IsUpdate = ProveedorBLL.updateProveedor(prov);
 
                 if (IsUpdate)
@@ -238,21 +224,20 @@ namespace MercatorWinFormApp.Configuracion
 
                 MessageBox.Show(ex.Message);
             }
-       
+
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             try
             {
-                Proveedor prov = new Proveedor();
+                int id;
 
-                prov.IdProveedor = Convert.ToInt32(txtId.Text = "");
-                prov.NombreProv = txtNomProv.Text = "";
-                prov.Direccion = txtDireccionProv.Text = "";
-                prov.Telefono = Convert.ToInt32(txtTelefono.Text = "");
-                
-                bool IsDelete = ProveedorBLL.deleteProveedor(prov.IdProveedor);
+                id = Convert.ToInt32(txtIdProv.Text);
+
+                ProveedorBLL.getProveedorByName(id);
+
+                bool IsDelete = ProveedorBLL.deleteProveedor(id);
 
                 if (IsDelete)
                 {
@@ -270,8 +255,8 @@ namespace MercatorWinFormApp.Configuracion
                 MessageBox.Show(ex.Message);
             }
 
-                
-            
+
+
         }
 
 
@@ -285,18 +270,18 @@ namespace MercatorWinFormApp.Configuracion
             {
                 Empleado emp = new Empleado();
 
-                emp.IdEmpleado = Convert.ToInt32(txtIdEmp.Text.ToString());
+
                 emp.Dni = txtDni.Text.Trim();
                 emp.Apellido = txtApellidoEmp.Text.Trim();
                 emp.Nombre = txtNombreEmp.Text.Trim();
 
                 if (rbnFemenino.Checked == true)
                 {
-                    emp.Sexo = rbnFemenino.Checked.ToString();
+                    emp.Sexo = rbnFemenino.Text = "F";
                 }
                 else if (rbnMasculino.Checked == true)
                 {
-                    emp.Sexo = rbnMasculino.Checked.ToString();
+                    emp.Sexo = rbnMasculino.Text = "M";
                 }
 
                 emp.FechaNac = Convert.ToDateTime(dtpFecha.Text.ToString());
@@ -372,19 +357,16 @@ namespace MercatorWinFormApp.Configuracion
 
         private void btnBorrarEmp_Click(object sender, EventArgs e)
         {
-            try {
-            Empleado emp = new Empleado();
+            try
+            {
 
-            emp.IdEmpleado = Convert.ToInt32(txtIdEmp.Text = "");
-            emp.Dni = txtDni.Text = "";
-            emp.Apellido = txtApellidoEmp.Text = "";
-            emp.Nombre = txtNombreEmp.Text = "";
-            rbnFemenino.AutoCheck = false;
-            rbnMasculino.AutoCheck = false;
-            emp.FechaNac = dtpFecha.Value = DateTime.Now;
-            emp.Direccion = txtDireccionEmp.Text = "";
+                int id;
 
-             bool IsDelete = EmpleadoBLL.deleteEmpleado(emp.IdEmpleado);
+                id = Convert.ToInt32(txtIdEmp.Text);
+
+                EmpleadoBLL.getEmpleadoByName(id);
+
+                bool IsDelete = EmpleadoBLL.deleteEmpleado(id);
 
                 if (IsDelete)
                 {
@@ -416,13 +398,13 @@ namespace MercatorWinFormApp.Configuracion
             {
 
                 Dato dat = new Dato();
-               
+
 
                 dat.Nombre = txtNombreDato.Text.Trim();
                 dat.Localidad = txtLocalidad.Text.Trim();
                 dat.Telefono = Convert.ToInt32(txtTelefonoDato.Text.ToString());
                 dat.Horario = Convert.ToDateTime(dtpHorario.Value.ToString());
-               
+
 
                 bool IsInsert = DatosBLL.createDatosEmpresa(dat);
 
@@ -454,7 +436,7 @@ namespace MercatorWinFormApp.Configuracion
 
                 Dato dat = new Dato();
 
-
+                dat.IdDatos = Convert.ToInt32(txtIdDat.Text.ToString());
                 dat.Nombre = txtNombreDato.Text.Trim();
                 dat.Localidad = txtLocalidad.Text.Trim();
                 dat.Telefono = Convert.ToInt32(txtTelefonoDato.Text.ToString());
@@ -491,19 +473,8 @@ namespace MercatorWinFormApp.Configuracion
         }
         #endregion
 
-       
-
-        private void cbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-          
 
 
-            fillListaCategoria(cbxCategoria, "IdCategoria", ListaCategoriaBLL.mostrarCategoria());
-
-
-           
-        }
 
         private void fillListaCategoria(ComboBox cbo, string valueField, DataTable dt)
         {
@@ -512,29 +483,147 @@ namespace MercatorWinFormApp.Configuracion
             cbo.DataSource = dt;
             cbo.DisplayMember = "Descripcion";
             cbo.ValueMember = "IdCategoria";
-            
+
         }
 
 
-        void conv_photo()
+        #region Imagen a Binario
+        public byte[] imageToByteArray(System.Drawing.Image imageIn)
         {
-            if (pbImagen.Image != null)
+            using (var ms = new MemoryStream())
             {
-                ms = new MemoryStream();
-                pbImagen.Image.Save(ms, ImageFormat.Jpeg);
-                byte[] photo_aray = new byte[ms.Length];
-                ms.Position = 0;
-                ms.Read(photo_aray, 0, photo_aray.Length);
-                cmd.Parameters.AddWithValue("@Foto", photo_aray);
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                return ms.ToArray();
             }
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        public Image byteArrayToImage(byte[] byteArrayIn)
         {
-            ProductoBLL.getProductos();
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
-       
+        #endregion
+
+        #region Leer Codigo de Barras
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+                MessageBox.Show("Codigo de producto añadido.");
+        }
+        #endregion
+
+        #region SearchProduct
+        private void SearchProduct()
+        {
+
+            int Id;
+
+            Id = Convert.ToInt32(txtId.Text);
+
+            Producto pro = ProductoBLL.getProductoByDescription(Id);
+
+            cbxCategoria.SelectedValue = pro.IdCategoria.ToString();
+            txtProducto.Text = pro.Nombre.ToString();
+            txtMarca.Text = pro.Marca.ToString();
+            txtStock.Text = pro.Stock.ToString();
+            txtPCompra.Text = pro.PrecioCompra.ToString();
+            txtPVenta.Text = pro.PrecioVenta.ToString();
+            pro.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Text.ToString());
+            pbImagen.Image = byteArrayToImage(pro.Foto);
+
+
+        }
+        #endregion
+
+        #region SearchProveedor
+        private void SearchProvedor()
+        {
+
+            int Id;
+
+            Id = Convert.ToInt32(txtIdProv.Text);
+
+            Proveedor prov = ProveedorBLL.getProveedorByName(Id);
+
+
+            txtNomProv.Text = prov.NombreProv.ToString();
+            txtDireccionProv.Text = prov.Direccion.ToString();
+            txtTelefono.Text = prov.Telefono.ToString();
+
+
+        }
+        #endregion
+
+        #region SearchEmp
+        private void SearchEmp()
+        {
+
+            int Id;
+
+            Id = Convert.ToInt32(txtIdEmp.Text);
+
+            Empleado emp = EmpleadoBLL.getEmpleadoByName(Id);
+
+            txtDni.Text = emp.Dni.ToString();
+            txtApellidoEmp.Text = emp.Apellido.ToString();
+            txtNombreEmp.Text = emp.Nombre.ToString();
+            rbnMasculino.Checked = false;
+            rbnFemenino.Checked = false;
+            dtpFecha.Text = Convert.ToString(emp.FechaNac);
+            txtDireccionEmp.Text = emp.Direccion.ToString();
+
+
+        }
+        #endregion
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            SearchProduct();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SearchProvedor();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            SearchEmp();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            txtIdEmp.Text = "";
+            txtDni.Text = "";
+            txtApellidoEmp.Text = "";
+            txtNombreEmp.Text = "";
+            dtpFecha.Text = "";
+            txtDireccionEmp.Clear();
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtIdProv.Clear();
+            txtNomProv.Clear();
+            txtDireccionProv.Clear();
+            txtTelefono.Clear();
+        }
+
+        private void btnResetear_Click(object sender, EventArgs e)
+        {
+            txtId.Clear();
+            txtProducto.Clear();
+            txtMarca.Clear();
+            txtStock.Clear();
+            txtPCompra.Clear();
+            txtPVenta.Clear();
+            pbImagen.Image = null;
+        }
+
 
 
 
@@ -542,8 +631,8 @@ namespace MercatorWinFormApp.Configuracion
 
     }
 
-       
 
-    
-    }
+
+
+}
 

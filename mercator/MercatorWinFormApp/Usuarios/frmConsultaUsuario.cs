@@ -17,12 +17,27 @@ namespace MercatorWinFormApp.Usuarios
         {
             InitializeComponent();
 
-            dgvUsuarios.DataSource = UsuarioBLL.getUsuarios();
+           
         }
 
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void frmConsultaUsuario_Load(object sender, EventArgs e)
+        {
+           
+            // TODO: This line of code loads data into the 'mercatorDataSet.Usuario' table. You can move, or remove it, as needed.
+            this.usuarioTableAdapter.Fill(this.mercatorDataSet.Usuario);
+
+            dgvUsuarios.DataSource = UsuarioBLL.cargarUsuarios();
+
+        }
+
+        private void btnSalirPro_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
